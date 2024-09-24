@@ -292,7 +292,7 @@ again:
         return ret;
     }
 
-    if (strncmp(handle->config.ip_address, inet_ntoa(si_other.sin_addr), SOCKET_IP_ADDRESS_SIZE))
+    if (!socket_is_broadcast_address(handle->config.ip_address) && strncmp(handle->config.ip_address, inet_ntoa(si_other.sin_addr), SOCKET_IP_ADDRESS_SIZE))
     {
         logger_log(LOG_DEBUG, "%s: packet received from wrong ip", __func__);
         goto again;
